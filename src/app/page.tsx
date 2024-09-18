@@ -28,7 +28,7 @@ export default function Component() {
     setLoading(true)
     try {
       console.log('Gönderilen resim:', image.substring(0, 100)); // İlk 100 karakteri göster
-      const response = await fetch('http://localhost:3001/solve', {
+      const response = await fetch('http://localhost:10000/solve', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
