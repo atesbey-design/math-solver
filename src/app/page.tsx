@@ -22,7 +22,6 @@ export default function Component() {
       reader.readAsDataURL(file)
     }
   }
-
   const handleSolve = async () => {
     if (!image) return
 
@@ -44,9 +43,13 @@ export default function Component() {
 
       const data = await response.json()
       setSolution(data.solution)
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Hata çözülürken:', error)
-      setSolution('Problemi çözerken bir hata oluştu: ' + error.message)
+      if (error instanceof Error) {
+        setSolution('Problemi çözerken bir hata oluştu: ' + error.message)
+      } else {
+        setSolution('Problemi çözerken bilinmeyen bir hata oluştu.')
+      }
     } finally {
       setLoading(false)
     }
@@ -87,7 +90,7 @@ export default function Component() {
           </div>
           {image && (
             <div className="mt-4">
-              <img src={image} alt="Yüklenen soru" className="w-full h-auto rounded-lg shadow-md" />
+              <Image src={image} alt="Generated image" width={500} height={500} />
             </div>
           )}
           {solution && (
