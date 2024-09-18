@@ -43,7 +43,7 @@ export default function Component() {
 
       const data = await response.json()
       setSolution(data.solution)
-    } catch (error) {
+    } catch (error: any) {
       console.error('Hata çözülürken:', error)
       setSolution('Problemi çözerken bir hata oluştu: ' + error.message)
     } finally {
